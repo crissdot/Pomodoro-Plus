@@ -1,0 +1,22 @@
+{
+  "name": "pomodoroplus",
+  "version": "0.1.0",
+  "description": "The Pomodoro technique with more flexibility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crissdot/Pomodoro-Plus.git"
+  },
+  "keywords": [
+    "Pomodoro"
+  ],
+  "author": "Crissdot",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Crissdot/Pomodoro-Plus/issues"
+  },
+  "homepage": "https://github.com/Crissdot/Pomodoro-Plus#readme"
+}
