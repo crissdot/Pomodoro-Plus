@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --lavender-blush: #f0e2e7;
+    --reed: #d72638;
+    --green: #76b041;
+}
+body {
+    background-color: var(--lavender-blush);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.timer-container {
+    width: 50vw;
+    margin: 0 auto;
+    text-align: center;
+}
+.timer {
+    font-size: 10rem;
+    color: var(--reed);
+}
+.btn {
+    padding: 15px;
+    width: 100px;
+}
+.rest-time {
+    color: var(--green);
+}
+
+
+.productivity {
+    width: 310px;
+    margin: 50px auto;
+}
+.productivity-time {
+    margin: 10px 0;
+    font-size: 2rem;
+}
+.total {
+    margin-top: 20px;
+    font-size: 4rem;
+}
