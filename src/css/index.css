@@ -14,16 +14,16 @@ body {
 }
 
 
-.timer-container {
+.container__timer {
     width: 50vw;
     margin: 0 auto;
     text-align: center;
 }
-.timer {
+.timer__counter {
     font-size: 10rem;
     color: var(--reed);
 }
-.btn {
+.timer__btn {
     padding: 15px;
     width: 100px;
 }
@@ -36,11 +36,11 @@ body {
     width: 310px;
     margin: 50px auto;
 }
-.productivity-time {
+.productivity__time {
     margin: 10px 0;
     font-size: 2rem;
 }
-.total {
+.productivity__total {
     margin-top: 20px;
     font-size: 4rem;
 }
