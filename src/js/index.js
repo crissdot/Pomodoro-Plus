@@ -42,14 +42,5 @@ btnAgain.addEventListener('click', () => {
 })
 
 btnStop.addEventListener('click', () => {
-    clearInterval(runTimer);
+    timer.pause();
 });
-
-function setTimer({minutes, seconds}) {
-    if(seconds === 59) {
-        minutes++;
-        seconds = 0;
-    } else seconds++;
-
-    return {minutes, seconds};
-}

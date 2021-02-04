@@ -22,6 +22,10 @@ class Timer {
         this._resetTimer();
     }
 
+    pause() {
+        clearInterval(this.interval);
+    }
+
     _resetTimer() {
         this.hours = 0;
         this.minutes = 0;
