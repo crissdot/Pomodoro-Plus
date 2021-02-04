@@ -1,25 +1,39 @@
-const displayTimer = document.querySelector('.timer');
-const btnStart = document.querySelector('.start');
-const btnAgain = document.querySelector('.again');
-const btnStop = document.querySelector('.stop');
-const productivityTime = document.querySelector('.productivity-time');
-const total = document.querySelector('.total');
+import Timer from './Timer.js';
+
+const displayTimer = document.querySelector('.timer__counter');
+const btnStart = document.querySelector('.timer__btn--start');
+const btnAgain = document.querySelector('.timer__btn--again');
+const btnStop = document.querySelector('.timer__btn--stop');
+const productivityTime = document.querySelector('.productivity__time');
+const total = document.querySelector('.productivity__total');
+
+const timerCounter = {
+    timer: displayTimer,
+    time: {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+    },
+}
+
+const timer = new Timer(timerCounter);
 
 let runTimer;
-let timer = {
-    minutes: 0,
-    seconds: 0,
-};
+// let timer = {
+//     minutes: 0,
+//     seconds: 0,
+// };
 
 btnStart.addEventListener('click', () => {
-    runTimer = setInterval(() => {
-        timer = setTimer(timer);
-        const {minutes, seconds} = timer;
-        displayTimer.innerHTML = `${minutes}:${seconds}`;
-        if(timer.minutes === 25) {
-            displayTimer.classList.add('rest-time');
-        }
-    }, 1000);
+    // runTimer = setInterval(() => {
+    //     timer = setTimer(timer);
+    //     const {minutes, seconds} = timer;
+    //     displayTimer.innerHTML = `${minutes}:${seconds}`;
+    //     if(timer.minutes === 25) {
+    //         displayTimer.classList.add('timer__counter--rest');
+    //     }
+    // }, 1000);
+    timer.start();
 });
 
 btnAgain.addEventListener('click', () => {
@@ -34,10 +48,10 @@ btnAgain.addEventListener('click', () => {
         minutes: 0,
         seconds: 0,
     };
-    displayTimer.classList.remove('rest-time');
+    displayTimer.classList.remove('timer__counter--rest');
     displayTimer.innerHTML = '0:0';
 
-    const allTime = document.querySelectorAll('.productivity-time > p');
+    const allTime = document.querySelectorAll('.productivity__time > p');
     let totalTime = 0;
     allTime.forEach(p => {
         const time = p.innerHTML.split(':');

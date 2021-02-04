@@ -27,7 +27,7 @@ body {
     padding: 15px;
     width: 100px;
 }
-.rest-time {
+.timer__counter--rest {
     color: var(--green);
 }
 
