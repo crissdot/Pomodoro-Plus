@@ -12,7 +12,7 @@ class Timer {
     start() {
         this.interval = setInterval(() => {
             this._formatTimer();
-            this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`; // TODO add rest class
+            this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
         }, 1000);
     }
 
@@ -25,15 +25,17 @@ class Timer {
     _resetTimer() {
         this.hours = 0;
         this.minutes = 0;
-        this.seconds = 0; // TODO remove rest class
+        this.seconds = 0;
+        this.timerCounter.classList.remove('timer__counter--rest');
         this.timerCounter.innerHTML = '0:0';
     }
 
     _formatTimer() {
-        if(this.seconds === 1) {
+        if(this.seconds === 59) {
             this.minutes++;
             this.seconds = 0;
         } else this.seconds++;
+        if(this.minutes === 5 && this.seconds === 0) this.timerCounter.classList.add('timer__counter--rest');
     }
 
     _addProductivityTime() {

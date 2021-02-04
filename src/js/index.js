@@ -11,8 +11,8 @@ const timerCounter = {
     timer: displayTimer,
     time: {
         hours: 0,
-        minutes: 0,
-        seconds: 0,
+        minutes: 4,
+        seconds: 58,
     },
     productivityTime,
     productivityTotal,
@@ -20,41 +20,14 @@ const timerCounter = {
 
 const timer = new Timer(timerCounter);
 
-let runTimer;
-// let timer = {
-//     minutes: 0,
-//     seconds: 0,
-// };
-
 btnStart.addEventListener('click', () => {
-    // runTimer = setInterval(() => {
-    //     timer = setTimer(timer);
-    //     const {minutes, seconds} = timer;
-    //     displayTimer.innerHTML = `${minutes}:${seconds}`;
-    //     if(timer.minutes === 25) {
-    //         displayTimer.classList.add('timer__counter--rest');
-    //     }
-    // }, 1000);
     timer.start();
 });
 
 btnAgain.addEventListener('click', () => {
-    // clearInterval(runTimer);
-    // if(timer.minutes >= 5) {
-    //     const p = document.createElement('p');
-    //     const text = document.createTextNode(`${timer.minutes}:${timer.seconds}`);
-    //     p.appendChild(text);
-    //     productivityTime.appendChild(p);
-    // }
-    // timer = {
-    //     minutes: 0,
-    //     seconds: 0,
-    // };
-    // displayTimer.classList.remove('timer__counter--rest');
-    // displayTimer.innerHTML = '0:0';
-
     timer.finish();
 
+    // TODO refactor this
     // const allTime = document.querySelectorAll('.productivity__time > p');
     // let totalTime = 0;
     // allTime.forEach(p => {
