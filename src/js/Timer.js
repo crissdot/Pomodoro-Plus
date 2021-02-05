@@ -30,8 +30,8 @@ class Timer {
 
     _resetTimer() {
         this.hours = 0;
-        this.minutes = 4;
-        this.seconds = 58;
+        this.minutes = 0;
+        this.seconds = 0;
         this.timerCounter.classList.remove('timer__counter--rest');
         this.timerCounter.innerHTML = '0:0';
     }

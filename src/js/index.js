@@ -11,8 +11,8 @@ const timerCounter = {
     timer: displayTimer,
     time: {
         hours: 0,
-        minutes: 4,
-        seconds: 58,
+        minutes: 0,
+        seconds: 0,
     },
     productivityTime,
     productivityTotal,
@@ -20,14 +20,8 @@ const timerCounter = {
 
 const timer = new Timer(timerCounter);
 
-btnStart.addEventListener('click', () => {
-    timer.start();
-});
+btnStart.addEventListener('click', () => timer.start());
 
-btnAgain.addEventListener('click', () => {
-    timer.finish();
-})
+btnAgain.addEventListener('click', () => timer.finish());
 
-btnStop.addEventListener('click', () => {
-    timer.pause();
-});
+btnStop.addEventListener('click', () => timer.pause());
