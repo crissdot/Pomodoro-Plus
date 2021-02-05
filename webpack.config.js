@@ -1,14 +1,16 @@
 const path = require('path');
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/js/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: 'js/bundle.js'
     },
-    mode: 'development',
+    mode: 'production',
     module: {
         rules: [
             {
@@ -22,13 +24,20 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin(),
+        ],
+    },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Plugins',
-            template: path.resolve(__dirname, 'src/index.html')
+            title: 'pomodoro-plus',
+            template: path.resolve(__dirname, 'public/index.html')
         }),
         new MiniCSSExtractPlugin({
             filename: 'css/[name].css'
-        })
+        }),
+        new CleanWebpackPlugin(),
     ]
 }
