@@ -1,3 +1,5 @@
+import '../css/index.css';
+
 import Timer from './Timer.js';
 
 const displayTimer = document.querySelector('.timer__counter');
