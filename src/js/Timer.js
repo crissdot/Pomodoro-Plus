@@ -20,6 +20,8 @@ class Timer {
         clearInterval(this.interval);
         this._addProductivityTime();
         this._resetTimer();
+        const totalTime  = this._makeSumOfProductivityTime();
+        this.productivityTotal.innerHTML = `Total: ${totalTime}`;
     }
 
     pause() {
@@ -28,8 +30,8 @@ class Timer {
 
     _resetTimer() {
         this.hours = 0;
-        this.minutes = 0;
-        this.seconds = 0;
+        this.minutes = 4;
+        this.seconds = 58;
         this.timerCounter.classList.remove('timer__counter--rest');
         this.timerCounter.innerHTML = '0:0';
     }
@@ -48,6 +50,34 @@ class Timer {
             productivityTime.append(`${this.minutes}:${this.seconds}`.toString());
             this.productivityTime.appendChild(productivityTime);
         }
+    }
+
+    _makeSumOfProductivityTime() {
+        const allTimeNodeList = this.productivityTime.querySelectorAll('p');
+        const allTimeElement = [...allTimeNodeList];
+        const allTime = allTimeElement.map(timeElement => timeElement.innerText);
+
+        const totalTimeInSeconds = allTime.reduce((totalTime, timeText) => {
+            const time = timeText.split(':');
+            const timeInSeconds = this._getTimeFromFormatTime(time);
+            return totalTime + timeInSeconds;
+        }, 0);
+        const totalTime = this._getFormatTimeFromTime(totalTimeInSeconds);
+        return totalTime;
+    }
+
+    _getTimeFromFormatTime(time) {
+        const minutes = parseInt(time[0]) * 60;
+        const seconds = parseInt(time[1]);
+        return minutes + seconds;
+    }
+
+    _getFormatTimeFromTime(totalTimeInSeconds) {
+        for(var i = 0; totalTimeInSeconds >= 60; i++) {
+            totalTimeInSeconds -= 60;
+        }
+        const min = i;
+        return `${min}:${totalTimeInSeconds}`;
     }
 }
 

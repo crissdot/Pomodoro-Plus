@@ -26,19 +26,6 @@ btnStart.addEventListener('click', () => {
 
 btnAgain.addEventListener('click', () => {
     timer.finish();
-
-    // TODO refactor this
-    // const allTime = document.querySelectorAll('.productivity__time > p');
-    // let totalTime = 0;
-    // allTime.forEach(p => {
-    //     const time = p.innerHTML.split(':');
-    //     totalTime += time[0]*60 + parseInt(time[1]);
-    // });
-    // for(var i = 0; totalTime >= 60; i++) {
-    //     totalTime -= 60;
-    // }
-    // let min = i;
-    // total.innerHTML = `Total: ${min}:${totalTime}`;
 })
 
 btnStop.addEventListener('click', () => {
