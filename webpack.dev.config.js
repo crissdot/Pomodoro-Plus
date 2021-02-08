@@ -6,7 +6,7 @@ module.exports = {
     entry: path.resolve(__dirname, 'src/js/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: 'js/index.js'
     },
     mode: 'development',
     devServer: {
@@ -22,6 +22,11 @@ module.exports = {
                     'style-loader',
                     'css-loader',
                 ]
+            },
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/,
             }
         ]
     },

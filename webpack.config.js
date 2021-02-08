@@ -8,7 +8,7 @@ module.exports = {
     entry: path.resolve(__dirname, 'src/js/index.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: 'js/index.js',
     },
     mode: 'production',
     module: {
@@ -21,6 +21,11 @@ module.exports = {
                     },
                     'css-loader',
                 ]
+            },
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+                exclude: /node_modules/,
             }
         ]
     },
@@ -36,7 +41,7 @@ module.exports = {
             template: path.resolve(__dirname, 'public/index.html')
         }),
         new MiniCSSExtractPlugin({
-            filename: 'css/[name].css'
+            filename: 'css/styles.css'
         }),
         new CleanWebpackPlugin(),
     ]
