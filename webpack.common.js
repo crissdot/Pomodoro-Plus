@@ -1,28 +1,15 @@
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
     entry: path.resolve(__dirname, 'src/js/index.js'),
     output: {
+        filename: 'js/index.js',
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/index.js'
-    },
-    mode: 'development',
-    devServer: {
-        hot: true,
-        open: true,
-        port: 5050,
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ]
-            },
             {
                 test: /\.js$/,
                 use: 'babel-loader',
@@ -31,10 +18,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'pomodoro-plus-dev',
+            title: 'pomodoro-plus',
             template: path.resolve(__dirname, 'public/index.html')
-        })
+        }),
     ]
 }
