@@ -4,8 +4,8 @@ import Timer from './Timer.js';
 
 const displayTimer = document.querySelector('.timer__counter');
 const btnStart = document.querySelector('.timer__btn--start');
-const btnAgain = document.querySelector('.timer__btn--again');
-const btnStop = document.querySelector('.timer__btn--stop');
+const btnPause = document.querySelector('.timer__btn--stop');
+const btnFinish = document.querySelector('.timer__btn--again');
 const productivityTime = document.querySelector('.productivity__time');
 const productivityTotal = document.querySelector('.productivity__total');
 
@@ -22,8 +22,27 @@ const timerCounter = {
 
 const timer = new Timer(timerCounter);
 
-btnStart.addEventListener('click', () => timer.start());
+btnStart.addEventListener('click', startHandler);
 
-btnAgain.addEventListener('click', () => timer.finish());
+btnFinish.addEventListener('click', () => {
+    btnStart.addEventListener('click', startHandler);
+    timer.finish();
+    btnStart.style.opacity = 1;
+    btnPause.style.opacity = 0;
+    btnFinish.style.opacity = 0;
+});
 
-btnStop.addEventListener('click', () => timer.pause());
+btnPause.addEventListener('click', () => {
+    btnStart.addEventListener('click', startHandler);
+    timer.pause();
+    btnStart.style.opacity = 1;
+    btnPause.style.opacity = 0;
+});
+
+function startHandler() {
+    btnStart.removeEventListener('click', startHandler);
+    timer.start();
+    btnStart.style.opacity = 0;
+    btnPause.style.opacity = 1;
+    btnFinish.style.opacity = 1;
+}
