@@ -17,6 +17,13 @@ body {
 }
 
 
+main {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+
 .container__timer {
     display: flex;
     width: 80%;
@@ -26,6 +33,7 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    scroll-snap-align: start;
 }
 .timer__counter {
     margin: 0 auto 30px;
@@ -57,6 +65,7 @@ body {
     height: 100vh;
     background-color: var(--variation-color);
     color: var(--white);
+    scroll-snap-align: start;
 }
 .productivity__info {
     display: flex;
@@ -75,7 +84,6 @@ body {
     font-size: 2rem;
 }
 .productivity__total {
-    margin: auto 0 30px;
-    margin-left: auto;
+    margin: auto 0 30px auto;
     font-size: 2.5rem;
 }
