@@ -1,29 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-:root {
-    --primary-color: #f2dedc;
-    --secondary-color: #00c3dd;
-    --variation-color: #4f4e8f;
-    --productivity-color: #9e3f3f;
-    --rest-color: #8fb627;
-    --white: #fafbfd;
-}
-body {
-    background-color: var(--primary-color);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
-main {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-}
-
-
 .container__timer {
     display: flex;
     width: 80%;

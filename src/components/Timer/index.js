@@ -1,6 +1,5 @@
-import '../css/index.css';
-
-import Timer from './Timer.js';
+import './style.css';
+import Timer from './CountUpTimer.js';
 
 const displayTimer = document.querySelector('.timer__counter');
 const btnStart = document.querySelector('.timer__btn--start');

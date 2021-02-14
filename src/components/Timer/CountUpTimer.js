@@ -41,7 +41,7 @@ class Timer {
             this.minutes++;
             this.seconds = 0;
         } else this.seconds++;
-        if(this.minutes === 5 && this.seconds === 0) this.timerCounter.classList.add('timer__counter--rest');
+        if(this.minutes === 25 && this.seconds === 0) this.timerCounter.classList.add('timer__counter--rest');
     }
 
     _addProductivityTime() {
@@ -73,7 +73,8 @@ class Timer {
     }
 
     _getFormatTimeFromTime(totalTimeInSeconds) {
-        for(var i = 0; totalTimeInSeconds >= 60; i++) {
+        let i;
+        for(i = 0; totalTimeInSeconds >= 60; i++) {
             totalTimeInSeconds -= 60;
         }
         const min = i;
