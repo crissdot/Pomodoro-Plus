@@ -21,13 +21,15 @@
     margin-top: 30px;
     border: 2px solid var(--variation-color);
     border-radius: 25px;
-    opacity: 0;
+    opacity: 1;
     background-color: var(--secondary-color);
     font-size: 2rem;
     font-weight: bold;
+    cursor: pointer;
 }
-.timer__btn--start {
-    opacity: 1;
+.timer__btn--disabled {
+    opacity: 0;
+    cursor: auto;
 }
 .timer__counter--rest {
     color: var(--rest-color);
