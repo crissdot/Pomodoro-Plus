@@ -7,13 +7,16 @@ class Timer {
         this.interval;
         this.productivityTime = timer.productivityTime;
         this.productivityTotal = timer.productivityTotal;
+        this.isStarted = false;
     }
 
     start() {
+        if(this.isStarted) return;
         this.interval = setInterval(() => {
             this._formatTimer();
             this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
         }, 1000);
+        this.isStarted = true;
     }
 
     finish() {
@@ -22,10 +25,12 @@ class Timer {
         this._resetTimer();
         const totalTime  = this._makeSumOfProductivityTime();
         this.productivityTotal.innerHTML = `Total: ${totalTime}`;
+        this.isStarted = false;
     }
 
     pause() {
         clearInterval(this.interval);
+        this.isStarted = false;
     }
 
     _resetTimer() {

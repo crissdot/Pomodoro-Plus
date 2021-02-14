@@ -21,20 +21,16 @@ const timerCounter = {
 
 const timer = new Timer(timerCounter);
 
-btnStart.addEventListener('click', startHandler);
-
-function startHandler() {
-    btnStart.removeEventListener('click', startHandler);
+btnStart.addEventListener('click', () => {
     timer.start();
     handleDisabled({
         isStartDisabled: true,
         isPauseDisabled: false,
         isFinishDisabled: false,
     });
-}
+});
 
 btnPause.addEventListener('click', () => {
-    btnStart.addEventListener('click', startHandler);
     timer.pause();
     handleDisabled({
         isStartDisabled: false,
@@ -43,7 +39,6 @@ btnPause.addEventListener('click', () => {
 });
 
 btnFinish.addEventListener('click', () => {
-    btnStart.addEventListener('click', startHandler);
     timer.finish();
     handleDisabled({
         isStartDisabled: false,
