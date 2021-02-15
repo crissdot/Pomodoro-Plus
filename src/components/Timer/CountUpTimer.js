@@ -8,6 +8,7 @@ class Timer {
         this.productivityTime = timer.productivityTime;
         this.productivityTotal = timer.productivityTotal;
         this.isStarted = false;
+        this.isRestTime = false;
     }
 
     start() {
@@ -21,10 +22,17 @@ class Timer {
 
     finish() {
         clearInterval(this.interval);
-        this._addProductivityTime();
-        this._resetTimer();
-        const totalTime  = this._makeSumOfProductivityTime();
-        this.productivityTotal.innerHTML = `Total: ${totalTime}`;
+        if (this.isRestTime) {
+            this._resetTimer();
+            this.isRestTime = false;
+            this.timerCounter.classList.remove('timer__counter--rest');
+        } else {
+            this._addProductivityTime();
+            this._resetTimer();
+            this.timerCounter.classList.add('timer__counter--rest');
+            const totalTime  = this._makeSumOfProductivityTime();
+            this.productivityTotal.innerHTML = `Total: ${totalTime}`;
+        }
         this.isStarted = false;
     }
 
@@ -54,6 +62,7 @@ class Timer {
             const productivityTime = document.createElement('p');
             productivityTime.append(`${this.minutes}:${this.seconds}`.toString());
             this.productivityTime.appendChild(productivityTime);
+            this.isRestTime = true;
         }
     }
 
