@@ -20,7 +20,7 @@ class Timer {
             this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
         }, 1000);
         this.isStarted = true;
-        this.headerTitle.innerHTML = 'WORKING';
+        if(!this.isRestTime) this.headerTitle.innerHTML = 'WORKING';
     }
 
     finish() {

@@ -9,6 +9,8 @@ const btnFinish = document.getElementById('finish');
 const productivityTime = document.querySelector('.productivity__time');
 const productivityTotal = document.querySelector('.productivity__total');
 
+let isRestTime = false;
+
 const timerCounter = {
     header,
     headerTitle,
@@ -43,11 +45,14 @@ btnPause.addEventListener('click', () => {
 
 btnFinish.addEventListener('click', () => {
     timer.finish();
-    handleDisabled({
-        isStartDisabled: false,
-        isPauseDisabled: true,
-        isFinishDisabled: true,
-    });
+    if(isRestTime) {
+        handleDisabled({
+            isStartDisabled: false,
+            isPauseDisabled: true,
+            isFinishDisabled: true,
+        });
+    }
+    isRestTime = !isRestTime;
 });
 
 
