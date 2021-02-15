@@ -1,5 +1,7 @@
 class Timer {
     constructor(timer) {
+        this.header = timer.header;
+        this.headerTitle = timer.headerTitle;
         this.timerCounter = timer.timer;
         this.hours = timer.time.hours || 0;
         this.minutes = timer.time.minutes || 0;
@@ -18,6 +20,7 @@ class Timer {
             this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
         }, 1000);
         this.isStarted = true;
+        this.headerTitle.innerHTML = 'WORKING';
     }
 
     finish() {
@@ -26,14 +29,20 @@ class Timer {
             this._resetTimer();
             this.isRestTime = false;
             this.timerCounter.classList.remove('timer__counter--rest');
-        } else {
-            this._addProductivityTime();
-            this._resetTimer();
-            this.timerCounter.classList.add('timer__counter--rest');
-            const totalTime  = this._makeSumOfProductivityTime();
-            this.productivityTotal.innerHTML = `Total: ${totalTime}`;
+            this.isStarted = false;
+            this.header.classList.remove('header--rest');
+            this.headerTitle.innerHTML = 'POMODORO PLUS';
+            return
         }
+        this._addProductivityTime();
+        this._resetTimer();
+        this.timerCounter.classList.add('timer__counter--rest');
+        const totalTime  = this._makeSumOfProductivityTime();
+        this.productivityTotal.innerHTML = `Total: ${totalTime}`
         this.isStarted = false;
+        this.start();
+        this.header.classList.add('header--rest');
+        this.headerTitle.innerHTML = 'RESTING';
     }
 
     pause() {
@@ -58,7 +67,7 @@ class Timer {
     }
 
     _addProductivityTime() {
-        if(this.minutes >= 5 || this.hours > 0) {
+        if(this.minutes >= 0 || this.hours > 0) {
             const productivityTime = document.createElement('p');
             productivityTime.append(`${this.minutes}:${this.seconds}`.toString());
             this.productivityTime.appendChild(productivityTime);

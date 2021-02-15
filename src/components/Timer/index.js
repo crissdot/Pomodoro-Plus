@@ -1,5 +1,6 @@
 import './style.css';
 import Timer from './CountUpTimer.js';
+import { header, headerTitle } from '../Header';
 
 const displayTimer = document.querySelector('.timer__counter');
 const btnStart = document.getElementById('start');
@@ -9,6 +10,8 @@ const productivityTime = document.querySelector('.productivity__time');
 const productivityTotal = document.querySelector('.productivity__total');
 
 const timerCounter = {
+    header,
+    headerTitle,
     timer: displayTimer,
     time: {
         hours: 0,
