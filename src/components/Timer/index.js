@@ -1,5 +1,5 @@
 import './style.css';
-import Timer from './CountUpTimer.js';
+import TimerUp from './CountUpTimer.js';
 
 const displayTimer = document.querySelector('.timer__counter');
 
@@ -11,6 +11,6 @@ const timerCounter = {
     },
 }
 
-const timer = new Timer(timerCounter);
+const timer = new TimerUp(timerCounter);
 
 export default timer;

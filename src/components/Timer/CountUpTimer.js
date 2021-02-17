@@ -1,25 +1,8 @@
-class Timer {
+import Timer from './CountTimer.js';
+
+class TimerUp extends Timer {
     constructor(timer) {
-        this.timerCounter = timer.timer;
-        this.minutes = timer.time.minutes || 0;
-        this.seconds = timer.time.seconds || 0;
-        this.interval;
-    }
-
-    start() {
-        this.interval = setInterval(() => {
-            this._formatTimer();
-            this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
-        }, 1000);
-    }
-
-    pause() {
-        clearInterval(this.interval);
-    }
-
-    finish() {
-        clearInterval(this.interval);
-        this._resetTimer();
+        super(timer);
     }
 
     _resetTimer() {
@@ -39,4 +22,4 @@ class Timer {
 
 }
 
-export default Timer;
+export default TimerUp;
