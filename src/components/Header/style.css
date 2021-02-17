@@ -4,13 +4,13 @@ header {
     height: 50px;
     padding-top: 5px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    background-color: var(--productivity-color);
-    color: var(--white);
+    background-color: var(--color-productivity);
+    color: var(--color-white);
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 .header--rest {
-    background-color: var(--rest-color);
+    background-color: var(--color-rest);
 }

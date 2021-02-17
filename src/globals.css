@@ -4,15 +4,15 @@
     box-sizing: border-box;
 }
 :root {
-    --primary-color: #f2dedc;
-    --secondary-color: #00c3dd;
-    --variation-color: #4f4e8f;
-    --productivity-color: #9e3f3f;
-    --rest-color: #8fb627;
-    --white: #fafbfd;
+    --color-primary: #f2dedc;
+    --color-secondary: #00c3dd;
+    --color-variation: #4f4e8f;
+    --color-productivity: #9e3f3f;
+    --color-rest: #8fb627;
+    --color-white: #fafbfd;
 }
 body {
-    background-color: var(--primary-color);
+    background-color: var(--color-primary);
     font-family: Arial, Helvetica, sans-serif;
 }
 

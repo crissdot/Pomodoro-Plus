@@ -1,10 +1,10 @@
 import timer from './components/Timer';
+import './components/Header';
 
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
 const btnFinish = document.getElementById('finish');
 
-let isRestTime = false;
 
 btnStart.addEventListener('click', () => {
     timer.start();
@@ -25,14 +25,11 @@ btnPause.addEventListener('click', () => {
 
 btnFinish.addEventListener('click', () => {
     timer.finish();
-    if(isRestTime) {
-        handleDisabled({
-            isStartDisabled: false,
-            isPauseDisabled: true,
-            isFinishDisabled: true,
-        });
-    }
-    isRestTime = !isRestTime;
+    handleDisabled({
+        isStartDisabled: false,
+        isPauseDisabled: true,
+        isFinishDisabled: true,
+    });
 });
 
 
