@@ -1,3 +1,2 @@
 import './globals.css';
-import './components/Timer';
-import './components/Header';
+import './app.js';
