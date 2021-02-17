@@ -1,5 +1,6 @@
-import timer from './components/Timer';
 import './components/Header';
+import timer from './components/Timer';
+import { addFocusTime } from './components/FocusTime';
 
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
@@ -24,7 +25,8 @@ btnPause.addEventListener('click', () => {
 });
 
 btnFinish.addEventListener('click', () => {
-    timer.finish();
+    const [minutes, seconds] = timer.finish();
+    addFocusTime(minutes, seconds);
     handleDisabled({
         isStartDisabled: false,
         isPauseDisabled: true,

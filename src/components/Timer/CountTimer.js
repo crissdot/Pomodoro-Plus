@@ -19,7 +19,8 @@ class Timer {
 
     finish() {
         clearInterval(this.interval);
-        this._resetTimer();
+        const [minutes, seconds] = this._resetTimer();
+        return [minutes, seconds];
     }
 
     _resetTimer() {}

@@ -6,10 +6,12 @@ class TimerUp extends Timer {
     }
 
     _resetTimer() {
+        const [minutes, seconds] = [this.minutes, this.seconds];
         this.minutes = 0;
         this.seconds = 0;
         this.timerCounter.classList.remove('timer__counter--rest');
         this.timerCounter.innerHTML = '00:00';
+        return [minutes, seconds];
     }
 
     _formatTimer() {
