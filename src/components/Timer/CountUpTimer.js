@@ -3,6 +3,8 @@ import Timer from './CountTimer.js';
 class TimerUp extends Timer {
     constructor(timer) {
         super(timer);
+        this.isFocusing = true;
+        this.timerCounter.classList.remove('timer__counter--rest');
     }
 
     _resetTimer() {

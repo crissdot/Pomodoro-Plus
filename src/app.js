@@ -1,14 +1,32 @@
 import './components/Header';
-import timer from './components/Timer';
+import { makeTimerUp, makeTimerDown } from './components/Timer';
 import { addFocusTime } from './components/FocusTime';
 
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
 const btnFinish = document.getElementById('finish');
 
+let isFocusing = true;
+let isRunning = false;
+
+const timerUp = makeTimerUp();
+let timerDown;
+let time = {
+    minutes: 0,
+    seconds: 0,
+};
+
 
 btnStart.addEventListener('click', () => {
-    timer.start();
+    if(isFocusing && !isRunning) {
+        isFocusing = timerUp.start();
+        isRunning = true;
+    }
+    if(!isFocusing && !isRunning) {
+        timerDown = makeTimerDown(time.minutes, time.seconds);
+        isFocusing = timerDown.start();
+        isRunning = true;
+    }
     handleDisabled({
         isStartDisabled: true,
         isPauseDisabled: false,
@@ -17,7 +35,14 @@ btnStart.addEventListener('click', () => {
 });
 
 btnPause.addEventListener('click', () => {
-    timer.pause();
+    if(isFocusing && isRunning) {
+        timerUp.pause();
+        isRunning = false;
+    }
+    if(!isFocusing && isRunning) {
+        timerDown.pause();
+        isRunning = false;
+    }
     handleDisabled({
         isStartDisabled: false,
         isPauseDisabled: true,
@@ -25,8 +50,19 @@ btnPause.addEventListener('click', () => {
 });
 
 btnFinish.addEventListener('click', () => {
-    const [minutes, seconds] = timer.finish();
-    addFocusTime(minutes, seconds);
+    if(!isFocusing) {
+        const [ , , isFocus] = timerDown.finish();
+        isFocusing = isFocus;
+        isRunning = false;
+    }
+    if(isFocusing) {
+        const [minutes, seconds, isFocus] = timerUp.finish();
+        time.minutes = minutes;
+        time.seconds = seconds;
+        addFocusTime(minutes, seconds);
+        isFocusing = isFocus;
+        isRunning = false;
+    }
     handleDisabled({
         isStartDisabled: false,
         isPauseDisabled: true,
