@@ -2,6 +2,8 @@ import './components/Header';
 import { makeTimerUp, makeTimerDown } from './components/Timer';
 import { addFocusTime } from './components/FocusTime';
 
+import { getTimeFromSeconds } from './utils/getTimeFromSeconds.js';
+
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
 const btnFinish = document.getElementById('finish');
@@ -57,8 +59,7 @@ btnFinish.addEventListener('click', () => {
     }
     if(isFocusing) {
         const [minutes, seconds, isFocus] = timerUp.finish();
-        time.minutes = minutes;
-        time.seconds = seconds;
+        time = makeRestTime(minutes);
         addFocusTime(minutes, seconds);
         isFocusing = isFocus;
         isRunning = false;
@@ -69,6 +70,15 @@ btnFinish.addEventListener('click', () => {
         isFinishDisabled: true,
     });
 });
+
+
+function makeRestTime(totalMinutes) {
+    let secondsToRest = 0;
+    for(let i = 0; i < totalMinutes; i++) secondsToRest += 10;
+    secondsToRest += parseInt(totalMinutes / 5) * 10;
+    const [minutes, seconds] = getTimeFromSeconds(secondsToRest);
+    return {minutes, seconds};
+}
 
 
 function handleDisabled({isStartDisabled, isPauseDisabled, isFinishDisabled=false}) {
