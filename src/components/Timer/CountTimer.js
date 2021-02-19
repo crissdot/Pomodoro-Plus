@@ -1,3 +1,4 @@
+import { makeFormat } from '../../utils/makeTimerFormat.js';
 class Timer {
     static isFocusing;
 
@@ -12,7 +13,9 @@ class Timer {
         if(this.interval) return;
         this.interval = setInterval(() => {
             this._formatTimer();
-            this.timerCounter.innerHTML = `${this.minutes}:${this.seconds}`;
+            const minutes = makeFormat(this.minutes);
+            const seconds = makeFormat(this.seconds);
+            this.timerCounter.innerHTML = `${minutes}:${seconds}`;
         }, 1000);
         return this.isFocusing;
     }

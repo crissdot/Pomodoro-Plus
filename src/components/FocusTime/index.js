@@ -1,5 +1,6 @@
 import './style.css';
 
+import { makeFormat } from '../../utils/makeTimerFormat.js';
 import { getTimeFromSeconds } from '../../utils/getTimeFromSeconds.js';
 
 const focusTimeContainer = document.querySelector('.focus__time');
@@ -8,6 +9,8 @@ const focusTotal = document.querySelector('.focus__total');
 function addFocusTime(minutes, seconds) {
     if(minutes >= 5) {
         const focusTime = document.createElement('p');
+        minutes = makeFormat(minutes);
+        seconds = makeFormat(seconds);
         focusTime.append(`${minutes}:${seconds}`.toString());
         focusTimeContainer.appendChild(focusTime);
         makeSumOfFocusTime();
@@ -24,7 +27,9 @@ function makeSumOfFocusTime() {
         const timeInSeconds = getTimeFromFormatTime(time);
         return totalTime + timeInSeconds;
     }, 0);
-    const [minutes, seconds] = getTimeFromSeconds(totalTimeInSeconds)
+    const [min, sec] = getTimeFromSeconds(totalTimeInSeconds)
+    const minutes = makeFormat(min);
+    const seconds = makeFormat(sec);
     const totalTime = `${minutes}:${seconds}`;
     focusTotal.innerHTML = `Total: ${totalTime}`;
 }
