@@ -3,10 +3,16 @@ import { makeTimerUp, makeTimerDown } from './components/Timer';
 import { addFocusTime } from './components/FocusTime';
 
 import { getTimeFromSeconds } from './utils/getTimeFromSeconds.js';
+import { disabledStart, disabledPause, disabledFinish, handleDisabledButtons } from './utils/handleDisabledButtons.js';
 
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
 const btnFinish = document.getElementById('finish');
+const buttons = {
+    btnStart,
+    btnPause,
+    btnFinish,
+};
 
 let isFocusing = true;
 let isRunning = false;
@@ -29,11 +35,8 @@ btnStart.addEventListener('click', () => {
         isFocusing = timerDown.start();
         isRunning = true;
     }
-    handleDisabled({
-        isStartDisabled: true,
-        isPauseDisabled: false,
-        isFinishDisabled: false,
-    });
+
+    handleDisabledButtons(buttons, disabledStart);
 });
 
 btnPause.addEventListener('click', () => {
@@ -45,10 +48,8 @@ btnPause.addEventListener('click', () => {
         timerDown.pause();
         isRunning = false;
     }
-    handleDisabled({
-        isStartDisabled: false,
-        isPauseDisabled: true,
-    });
+
+    handleDisabledButtons(buttons, disabledPause);
 });
 
 btnFinish.addEventListener('click', () => {
@@ -64,11 +65,8 @@ btnFinish.addEventListener('click', () => {
         isFocusing = isFocus;
         isRunning = false;
     }
-    handleDisabled({
-        isStartDisabled: false,
-        isPauseDisabled: true,
-        isFinishDisabled: true,
-    });
+
+    handleDisabledButtons(buttons, disabledFinish);
 });
 
 
@@ -78,14 +76,4 @@ function makeRestTime(totalMinutes) {
     secondsToRest += parseInt(totalMinutes / 5) * 10;
     const [minutes, seconds] = getTimeFromSeconds(secondsToRest);
     return {minutes, seconds};
-}
-
-
-function handleDisabled({isStartDisabled, isPauseDisabled, isFinishDisabled=false}) {
-    btnStart.disabled = isStartDisabled;
-    isStartDisabled ? btnStart.classList.add('timer__btn--disabled') : btnStart.classList.remove('timer__btn--disabled');
-    btnPause.disabled = isPauseDisabled;
-    isPauseDisabled ? btnPause.classList.add('timer__btn--disabled') : btnPause.classList.remove('timer__btn--disabled');
-    btnFinish.disabled = isFinishDisabled;
-    isFinishDisabled ? btnFinish.classList.add('timer__btn--disabled') : btnFinish.classList.remove('timer__btn--disabled');
 }
