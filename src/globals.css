@@ -10,6 +10,7 @@
     --color-productivity: #9e3f3f;
     --color-rest: #8fb627;
     --color-white: #fafbfd;
+    --height-main: calc(100vh - 50px);
 }
 body {
     background-color: var(--color-primary);
@@ -18,7 +19,7 @@ body {
 
 
 main {
-    height: 100vh;
+    height: var(--height-main);
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 }
