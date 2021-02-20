@@ -26,13 +26,13 @@ let time = {
 
 
 btnStart.addEventListener('click', () => {
-    if(isFocusing && !isRunning) {
-        isFocusing = timerUp.start();
-        isRunning = true;
-    }
-    if(!isFocusing && !isRunning) {
-        timerDown = makeTimerDown(time.minutes, time.seconds);
-        isFocusing = timerDown.start();
+    if(!isRunning) {
+        if(isFocusing) isFocusing = timerUp.start();
+        else {
+            timerDown = makeTimerDown(time.minutes, time.seconds);
+            isFocusing = timerDown.start();
+        }
+
         isRunning = true;
     }
 
@@ -40,12 +40,10 @@ btnStart.addEventListener('click', () => {
 });
 
 btnPause.addEventListener('click', () => {
-    if(isFocusing && isRunning) {
-        timerUp.pause();
-        isRunning = false;
-    }
-    if(!isFocusing && isRunning) {
-        timerDown.pause();
+    if(isRunning) {
+        if(isFocusing) timerUp.pause();
+        else timerDown.pause();
+
         isRunning = false;
     }
 
@@ -53,19 +51,17 @@ btnPause.addEventListener('click', () => {
 });
 
 btnFinish.addEventListener('click', () => {
-    if(!isFocusing) {
-        const [ , , isFocus] = timerDown.finish();
-        isFocusing = isFocus;
-        isRunning = false;
-    }
     if(isFocusing) {
         const [minutes, seconds, isFocus] = timerUp.finish();
         time = makeRestTime(minutes);
         addFocusTime(minutes, seconds);
         isFocusing = isFocus;
-        isRunning = false;
+    } else {
+        const [ , , isFocus] = timerDown.finish();
+        isFocusing = isFocus;
     }
 
+    isRunning = false;
     handleDisabledButtons(buttons, disabledFinish);
 });
 
