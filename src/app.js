@@ -28,10 +28,7 @@ let time = {
 btnStart.addEventListener('click', () => {
     if(!isRunning) {
         if(isFocusing) isFocusing = timerUp.start();
-        else {
-            timerDown = makeTimerDown(time.minutes, time.seconds);
-            isFocusing = timerDown.start();
-        }
+        else isFocusing = timerDown.start();
 
         isRunning = true;
     }
@@ -56,6 +53,13 @@ btnFinish.addEventListener('click', () => {
         time = makeRestTime(minutes);
         addFocusTime(minutes, seconds);
         isFocusing = isFocus;
+
+        if(minutes >= 5) {
+            timerDown = makeTimerDown(time.minutes, time.seconds);
+            timerDown.start();
+            isRunning = true;
+            return;
+        }
     } else {
         const [ , , isFocus] = timerDown.finish();
         isFocusing = isFocus;

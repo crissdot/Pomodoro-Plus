@@ -3,6 +3,7 @@ import Timer from './CountTimer.js';
 class TimerUp extends Timer {
     constructor(timer) {
         super(timer);
+        this.isFocusing = true;
         this.timerCounter.classList.remove('timer__counter--rest');
     }
 
@@ -12,7 +13,7 @@ class TimerUp extends Timer {
         this.seconds = 0;
         this.timerCounter.classList.remove('timer__counter--rest');
         this.timerCounter.innerHTML = '00:00';
-        return [minutes, seconds];
+        return [minutes, seconds, this.isFocusing];
     }
 
     _formatTimer() {

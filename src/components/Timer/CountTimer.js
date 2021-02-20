@@ -29,8 +29,8 @@ class Timer {
     finish() {
         clearInterval(this.interval);
         this.interval = null;
-        const [minutes, seconds] = this._resetTimer();
-        Timer.isFocusing = !Timer.isFocusing;
+        const [minutes, seconds, isFocusing] = this._resetTimer();
+        if(!(isFocusing && minutes < 5)) Timer.isFocusing = !Timer.isFocusing;
         return [minutes, seconds, Timer.isFocusing];
     }
 
