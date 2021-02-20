@@ -1,6 +1,6 @@
 import { makeFormat } from '../../utils/makeTimerFormat.js';
 class Timer {
-    static isFocusing;
+    static isFocusing = true;
 
     constructor(timer) {
         this.timerCounter = timer.timer;
@@ -17,7 +17,7 @@ class Timer {
             const seconds = makeFormat(this.seconds);
             this.timerCounter.innerHTML = `${minutes}:${seconds}`;
         }, 1000);
-        return this.isFocusing;
+        return Timer.isFocusing;
     }
 
     pause() {
@@ -29,9 +29,9 @@ class Timer {
     finish() {
         clearInterval(this.interval);
         this.interval = null;
-        this.isFocusing = !this.isFocusing;
         const [minutes, seconds] = this._resetTimer();
-        return [minutes, seconds, this.isFocusing];
+        Timer.isFocusing = !Timer.isFocusing;
+        return [minutes, seconds, Timer.isFocusing];
     }
 
     _resetTimer() {}
