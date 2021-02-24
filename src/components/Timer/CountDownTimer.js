@@ -4,13 +4,13 @@ class TimerDown extends Timer {
     constructor(timer) {
         super(timer);
         this.isFocusing = false;
-        this.timerCounter.classList.add('timer__counter--rest');
+        Timer.timerCounter.classList.add('timer__counter--rest');
     }
 
     _resetTimer() {
         this.minutes = 0;
         this.seconds = 0;
-        this.timerCounter.innerHTML = '00:00';
+        Timer.timerCounter.innerHTML = '00:00';
         return [0, 0, this.isFocusing];
     }
 
@@ -20,7 +20,7 @@ class TimerDown extends Timer {
             this.seconds = 59;
         } else this.seconds--;
         if(this.minutes === 0 && this.seconds === 0) {
-            this.timerCounter.classList.remove('timer__counter--rest');
+            Timer.timerCounter.classList.remove('timer__counter--rest');
             clearInterval(this.interval);
         }
     }

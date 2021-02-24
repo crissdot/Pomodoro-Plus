@@ -1,12 +1,11 @@
 import './style.css';
+import Timer from './CountTimer.js';
 import TimerUp from './CountUpTimer.js';
 import TimerDown from './CountDownTimer.js';
 
-const displayTimer = document.querySelector('.timer__counter');
 
 function makeTimerUp() {
     const countUpTimer = {
-        timer: displayTimer,
         time: {
             minutes: 0,
             seconds: 0,
@@ -19,7 +18,6 @@ function makeTimerUp() {
 
 function makeTimerDown(minutes, seconds) {
     const countDownTimer = {
-        timer: displayTimer,
         time: {
             minutes,
             seconds,
@@ -30,4 +28,8 @@ function makeTimerDown(minutes, seconds) {
     return timerDown;
 }
 
-export { makeTimerUp, makeTimerDown };
+function renderTimer(minutes, seconds) {
+    Timer.render(minutes, seconds);
+}
+
+export { makeTimerUp, makeTimerDown, renderTimer };

@@ -1,5 +1,5 @@
 import './components/Header';
-import { makeTimerUp, makeTimerDown } from './components/Timer';
+import { makeTimerUp, makeTimerDown, renderTimer } from './components/Timer';
 import { addFocusTime } from './components/FocusTime';
 
 import { getTimeFromSeconds } from './utils/getTimeFromSeconds.js';
@@ -55,6 +55,7 @@ btnFinish.addEventListener('click', () => {
         isFocusing = isFocus;
 
         if(minutes >= 5) {
+            renderTimer(time.minutes, time.seconds);
             timerDown = makeTimerDown(time.minutes, time.seconds);
             timerDown.start();
             isRunning = true;

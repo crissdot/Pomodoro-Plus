@@ -1,11 +1,14 @@
+const displayTimer = document.querySelector('.timer__counter');
+
 import { makeFormat } from '../../utils/makeTimerFormat.js';
+
 class Timer {
     static isFocusing = true;
+    static timerCounter = displayTimer;
 
-    constructor(timer) {
-        this.timerCounter = timer.timer;
-        this.minutes = timer.time.minutes || 0;
-        this.seconds = timer.time.seconds || 0;
+    constructor({time}) {
+        this.minutes = time.minutes;
+        this.seconds = time.seconds;
         this.interval = null;
     }
 
@@ -13,9 +16,7 @@ class Timer {
         if(this.interval) return;
         this.interval = setInterval(() => {
             this._formatTimer();
-            const minutes = makeFormat(this.minutes);
-            const seconds = makeFormat(this.seconds);
-            this.timerCounter.innerHTML = `${minutes}:${seconds}`;
+            Timer.render(this.minutes, this.seconds);
         }, 1000);
         return Timer.isFocusing;
     }
@@ -32,6 +33,12 @@ class Timer {
         const [minutes, seconds, isFocusing] = this._resetTimer();
         if(!(isFocusing && minutes < 5)) Timer.isFocusing = !Timer.isFocusing;
         return [minutes, seconds, Timer.isFocusing];
+    }
+
+    static render(minutes, seconds) {
+        minutes = makeFormat(minutes);
+        seconds = makeFormat(seconds);
+        Timer.timerCounter.innerHTML = `${minutes}:${seconds}`;
     }
 
     _resetTimer() {}
