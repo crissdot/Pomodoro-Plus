@@ -35,6 +35,8 @@ class Timer {
         return [minutes, seconds, Timer.isFocusing];
     }
 
+    _formatTimer() {}
+
     static render(minutes, seconds) {
         minutes = makeFormat(minutes);
         seconds = makeFormat(seconds);
@@ -42,8 +44,6 @@ class Timer {
     }
 
     _resetTimer() {}
-
-    _formatTimer() {}
 
 }
 

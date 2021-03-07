@@ -19,16 +19,22 @@ let isRunning = false;
 
 const timerUp = makeTimerUp();
 let timerDown;
-let time = {
+let restTime = {
     minutes: 0,
     seconds: 0,
 };
+let restTimeout;
+let restTimeRemaining;
+let restTimeStart;
 
 
 btnStart.addEventListener('click', () => {
     if(!isRunning) {
         if(isFocusing) isFocusing = timerUp.start();
-        else isFocusing = timerDown.start();
+        else {
+            isFocusing = timerDown.start();
+            timeoutFinishRestTime(restTimeRemaining);
+        }
 
         isRunning = true;
     }
@@ -39,7 +45,11 @@ btnStart.addEventListener('click', () => {
 btnPause.addEventListener('click', () => {
     if(isRunning) {
         if(isFocusing) timerUp.pause();
-        else timerDown.pause();
+        else {
+            timerDown.pause();
+            clearTimeout(restTimeout);
+            restTimeRemaining -= Date.now() - restTimeStart;
+        }
 
         isRunning = false;
     }
@@ -50,20 +60,24 @@ btnPause.addEventListener('click', () => {
 btnFinish.addEventListener('click', () => {
     if(isFocusing) {
         const [minutes, seconds, isFocus] = timerUp.finish();
-        time = makeRestTime(minutes);
-        addFocusTime(minutes, seconds);
         isFocusing = isFocus;
+        restTime = makeRestTime(minutes);
+        addFocusTime(minutes, seconds);
 
         if(minutes >= 5) {
-            renderTimer(time.minutes, time.seconds);
-            timerDown = makeTimerDown(time.minutes, time.seconds);
+            const {minutes, seconds} = restTime;
+            renderTimer(minutes, seconds);
+            timerDown = makeTimerDown(minutes, seconds);
             timerDown.start();
             isRunning = true;
+            restTimeRemaining = (minutes * 60 + seconds) * 1000;
+            timeoutFinishRestTime(restTimeRemaining);
             return;
         }
     } else {
         const [ , , isFocus] = timerDown.finish();
         isFocusing = isFocus;
+        clearTimeout(restTimeout);
     }
 
     isRunning = false;
@@ -77,4 +91,14 @@ function makeRestTime(totalMinutes) {
     secondsToRest += parseInt(totalMinutes / 5) * 10;
     const [minutes, seconds] = getTimeFromSeconds(secondsToRest);
     return {minutes, seconds};
+}
+
+function timeoutFinishRestTime(milliseconds) {
+    restTimeout = setTimeout(() => {
+        const [ , , isFocus] = timerDown.finish();
+        isFocusing = isFocus;
+        isRunning = false;
+        handleDisabledButtons(buttons, disabledFinish);
+    }, milliseconds);
+    restTimeStart = Date.now();
 }
