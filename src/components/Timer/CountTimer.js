@@ -14,6 +14,7 @@ class Timer {
 
     start() {
         if(this.interval) return;
+        Timer.timerCounter.style.opacity = '1';
         this.interval = setInterval(() => {
             this._formatTimer();
             Timer.render(this.minutes, this.seconds);
@@ -23,12 +24,14 @@ class Timer {
 
     pause() {
         if(!this.interval) return;
+        Timer.timerCounter.style.opacity = '0.5';
         clearInterval(this.interval);
         this.interval = null;
     }
 
     finish() {
         clearInterval(this.interval);
+        Timer.timerCounter.style.opacity = '1';
         this.interval = null;
         const [minutes, seconds, isFocusing] = this._resetTimer();
         if(!(isFocusing && minutes < 5)) Timer.isFocusing = !Timer.isFocusing;
