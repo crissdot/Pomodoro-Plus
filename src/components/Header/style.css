@@ -19,6 +19,10 @@ header a:nth-of-type(2) {
     margin-top: 4px;
 }
 
+.header__svg--rest {
+    fill: var(--color-primary);
+}
 .header--rest {
     background-color: var(--color-rest);
+    color: var(--color-primary);
 }

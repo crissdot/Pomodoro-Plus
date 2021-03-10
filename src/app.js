@@ -1,4 +1,4 @@
-import './components/Header';
+import { header, headerTitle, headerIcons } from './components/Header';
 import { makeTimerUp, makeTimerDown, renderTimer } from './components/Timer';
 import { addFocusTime } from './components/FocusTime';
 
@@ -30,7 +30,10 @@ let restTimeStart;
 
 btnStart.addEventListener('click', () => {
     if(!isRunning) {
-        if(isFocusing) isFocusing = timerUp.start();
+        if(isFocusing) {
+            isFocusing = timerUp.start();
+            headerTitle.innerHTML = 'FOCUSING';
+        }
         else {
             isFocusing = timerDown.start();
             timeoutFinishRestTime(restTimeRemaining);
@@ -65,6 +68,10 @@ btnFinish.addEventListener('click', () => {
         addFocusTime(minutes, seconds);
 
         if(minutes >= 5) {
+            headerTitle.innerHTML = 'RESTING';
+            header.classList.add('header--rest');
+            headerIcons[0].classList.add('header__svg--rest');
+            headerIcons[1].classList.add('header__svg--rest');
             const {minutes, seconds} = restTime;
             renderTimer(minutes, seconds);
             timerDown = makeTimerDown(minutes, seconds);
@@ -75,8 +82,7 @@ btnFinish.addEventListener('click', () => {
             return;
         }
     } else {
-        const [ , , isFocus] = timerDown.finish();
-        isFocusing = isFocus;
+        finishRestTime();
         clearTimeout(restTimeout);
     }
 
@@ -95,10 +101,18 @@ function makeRestTime(totalMinutes) {
 
 function timeoutFinishRestTime(milliseconds) {
     restTimeout = setTimeout(() => {
-        const [ , , isFocus] = timerDown.finish();
-        isFocusing = isFocus;
+        finishRestTime();
         isRunning = false;
         handleDisabledButtons(buttons, disabledFinish);
     }, milliseconds);
     restTimeStart = Date.now();
+}
+
+function finishRestTime() {
+    headerTitle.innerHTML = 'POMODORO PLUS';
+    header.classList.remove('header--rest');
+    headerIcons[0].classList.remove('header__svg--rest');
+    headerIcons[1].classList.remove('header__svg--rest');
+    const [ , , isFocus] = timerDown.finish();
+    isFocusing = isFocus;
 }
