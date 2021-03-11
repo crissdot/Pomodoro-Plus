@@ -7,12 +7,6 @@ class TimerDown extends Timer {
         Timer.timerCounter.classList.add('timer__counter--rest');
     }
 
-    pause(){
-        super.pause();
-        this._formatTimer();
-        Timer.render(this.minutes, this.seconds);
-    }
-
     _resetTimer() {
         this.minutes = 0;
         this.seconds = 0;

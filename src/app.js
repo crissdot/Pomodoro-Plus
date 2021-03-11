@@ -52,6 +52,7 @@ btnPause.addEventListener('click', () => {
             timerDown.pause();
             clearTimeout(restTimeout);
             restTimeRemaining -= Date.now() - restTimeStart;
+            restTimeRemaining = Math.ceil(restTimeRemaining / 1000) * 1000;
         }
 
         isRunning = false;
