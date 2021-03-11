@@ -60,7 +60,7 @@ btnPause.addEventListener('click', () => {
     handleDisabledButtons(buttons, disabledPause);
 });
 
-btnFinish.addEventListener('click', () => {
+btnFinish.addEventListener('click', (e) => {
     if(isFocusing) {
         const [minutes, seconds, isFocus] = timerUp.finish();
         isFocusing = isFocus;
@@ -79,6 +79,7 @@ btnFinish.addEventListener('click', () => {
             isRunning = true;
             restTimeRemaining = (minutes * 60 + seconds) * 1000;
             timeoutFinishRestTime(restTimeRemaining);
+            btnFinish.blur();
             return;
         }
     } else {
