@@ -1,4 +1,5 @@
 import Timer from './CountTimer.js';
+const timerLegend = document.querySelector('.timer__legend');
 
 class TimerUp extends Timer {
     constructor(timer) {
@@ -12,6 +13,7 @@ class TimerUp extends Timer {
         this.minutes = 0;
         this.seconds = 0;
         Timer.timerCounter.classList.remove('timer__counter--rest');
+        timerLegend.style.opacity = 0;
         Timer.timerCounter.innerHTML = '00:00';
         return [minutes, seconds, this.isFocusing];
     }
@@ -21,7 +23,10 @@ class TimerUp extends Timer {
             this.minutes++;
             this.seconds = 0;
         } else this.seconds++;
-        if(this.minutes === 25 && this.seconds === 0) Timer.timerCounter.classList.add('timer__counter--rest');
+        if(this.minutes === 25 && this.seconds === 0) {
+            Timer.timerCounter.classList.add('timer__counter--rest');
+            timerLegend.style.opacity = 1;
+        }
     }
 
 }

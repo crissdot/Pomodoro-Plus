@@ -10,9 +10,16 @@
     scroll-snap-align: start;
 }
 .timer__counter {
-    margin: 0 auto 30px;
+    margin: 0 auto;
     color: var(--color-productivity);
     font-size: 6rem;
+}
+.timer__legend {
+    margin: 10px 0;
+    color: var(--color-rest);
+    font-size: 1.6rem;
+    font-weight: bold;
+    opacity: 0;
 }
 .timer__btn {
     display: inline-block;
