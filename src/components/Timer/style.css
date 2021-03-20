@@ -52,4 +52,7 @@
     .container__timer {
         padding-left: 20px;
     }
+    .timer__counter {
+        font-size: 9rem;
+    }
 }
