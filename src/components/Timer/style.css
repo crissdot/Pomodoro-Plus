@@ -46,3 +46,10 @@
 .timer__counter--rest {
     color: var(--color-rest);
 }
+
+
+@media only screen and (min-width: 600px) {
+    .container__timer {
+        padding-left: 20px;
+    }
+}

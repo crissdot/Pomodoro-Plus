@@ -73,6 +73,9 @@ btnFinish.addEventListener('click', (e) => {
             header.classList.add('header--rest');
             headerIcons[0].classList.add('header__svg--rest');
             headerIcons[1].classList.add('header__svg--rest');
+            if(window.matchMedia('(min-width: 600px)').matches) {
+                btnStart.parentElement.parentElement.classList.add('scrollbar--rest');
+            }
             const {minutes, seconds} = restTime;
             renderTimer(minutes, seconds);
             timerDown = makeTimerDown(minutes, seconds);
@@ -115,6 +118,9 @@ function finishRestTime() {
     header.classList.remove('header--rest');
     headerIcons[0].classList.remove('header__svg--rest');
     headerIcons[1].classList.remove('header__svg--rest');
+    if(window.matchMedia('(min-width: 600px)').matches) {
+        btnStart.parentElement.parentElement.classList.remove('scrollbar--rest');
+    }
     const [ , , isFocus] = timerDown.finish();
     isFocusing = isFocus;
 }

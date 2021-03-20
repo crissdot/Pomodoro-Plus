@@ -29,3 +29,19 @@ main {
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 }
+
+
+@media only screen and (min-width: 600px) {
+    main::-webkit-scrollbar {
+        width: 20px;
+    }
+    main::-webkit-scrollbar-track {
+        background: var(--color-secondary);
+    }
+    main::-webkit-scrollbar-thumb {
+        background: var(--color-productivity);
+    }
+    .scrollbar--rest::-webkit-scrollbar-thumb {
+        background: var(--color-rest);
+    }
+}
