@@ -10,32 +10,44 @@ class Timer {
         this.minutes = time.minutes;
         this.seconds = time.seconds;
         this.interval = null;
+
+        this._handlerVisibilityChange = this._handlerVisibilityChange.bind(this);
     }
 
     start() {
         if(this.interval) return;
+        document.addEventListener('visibilitychange', this._handlerVisibilityChange);
         Timer.timerCounter.style.opacity = '1';
         this.interval = setInterval(() => {
             this._formatTimer();
-            Timer.render(this.minutes, this.seconds);
+            this._handlerVisibilityChange();
         }, 1000);
         return Timer.isFocusing;
     }
 
     pause() {
         if(!this.interval) return;
-        Timer.timerCounter.style.opacity = '0.5';
         clearInterval(this.interval);
+        Timer.timerCounter.style.opacity = '0.5';
         this.interval = null;
+        document.removeEventListener('visibilitychange', this._handlerVisibilityChange);
     }
 
     finish() {
         clearInterval(this.interval);
         Timer.timerCounter.style.opacity = '1';
         this.interval = null;
+        document.removeEventListener('visibilitychange', this._handlerVisibilityChange);
         const [minutes, seconds, isFocusing] = this._resetTimer();
         if(!(isFocusing && minutes < 5)) Timer.isFocusing = !Timer.isFocusing;
         return [minutes, seconds, Timer.isFocusing];
+    }
+
+    _handlerVisibilityChange() {
+        const isVisible = document.visibilityState === 'visible';
+        console.log(isVisible)
+
+        if(isVisible) Timer.render(this.minutes, this.seconds);
     }
 
     _formatTimer() {}
