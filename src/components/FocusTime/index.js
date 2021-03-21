@@ -5,6 +5,7 @@ import { getTimeFromSeconds } from '../../utils/getTimeFromSeconds.js';
 
 const focusTimeContainer = document.querySelector('.focus__time');
 const focusTotal = document.querySelector('.focus__total');
+const btnCleanTime = document.querySelector('.focus__btn');
 
 const initialLengthFocusTime = localStorage.getItem('length');
 if(initialLengthFocusTime > 0) {
@@ -15,6 +16,30 @@ if(initialLengthFocusTime > 0) {
         focusTimeContainer.appendChild(focusTimeP);
     }
     makeSumOfFocusTime();
+} else {
+    disableBtnCleanTime();
+}
+
+btnCleanTime.addEventListener('click', () => {
+    const allTimeNodeList = focusTimeContainer.querySelectorAll('p');
+    const allTimeElement = [...allTimeNodeList];
+    allTimeElement.forEach(timeElement => {
+        focusTimeContainer.removeChild(timeElement);
+    });
+
+    focusTotal.innerHTML = 'Total: 00:00';
+    btnCleanTime.blur();
+
+    localStorage.clear();
+    localStorage.setItem('length', 0);
+
+    disableBtnCleanTime();
+});
+
+function disableBtnCleanTime() {
+    btnCleanTime.style.opacity = 0;
+    btnCleanTime.style.cursor = 'auto';
+    btnCleanTime.disabled = true;
 }
 
 function addFocusTime(minutes, seconds) {
@@ -26,6 +51,11 @@ function addFocusTime(minutes, seconds) {
         focusTimeContainer.appendChild(focusTime);
 
         const lengthFocusTime = localStorage.getItem('length');
+        if(lengthFocusTime == 0) {
+            btnCleanTime.style.opacity = 1;
+            btnCleanTime.style.cursor = 'pointer';
+            btnCleanTime.disabled = false;
+        }
         localStorage.setItem('length', lengthFocusTime-1+2);
         localStorage.setItem(lengthFocusTime, `${minutes}:${seconds}`);
         makeSumOfFocusTime();
