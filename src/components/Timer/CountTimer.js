@@ -45,7 +45,6 @@ class Timer {
 
     _handlerVisibilityChange() {
         const isVisible = document.visibilityState === 'visible';
-        console.log(isVisible)
 
         if(isVisible) Timer.render(this.minutes, this.seconds);
     }

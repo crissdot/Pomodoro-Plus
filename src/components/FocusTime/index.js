@@ -6,6 +6,17 @@ import { getTimeFromSeconds } from '../../utils/getTimeFromSeconds.js';
 const focusTimeContainer = document.querySelector('.focus__time');
 const focusTotal = document.querySelector('.focus__total');
 
+const initialLengthFocusTime = localStorage.getItem('length');
+if(initialLengthFocusTime > 0) {
+    for(let i = 0; i < initialLengthFocusTime; i++) {
+        const focusTimeP = document.createElement('p');
+        const focusTime = localStorage.getItem(i);
+        focusTimeP.append(focusTime);
+        focusTimeContainer.appendChild(focusTimeP);
+    }
+    makeSumOfFocusTime();
+}
+
 function addFocusTime(minutes, seconds) {
     if(minutes >= 5) {
         const focusTime = document.createElement('p');
@@ -13,6 +24,10 @@ function addFocusTime(minutes, seconds) {
         seconds = makeFormat(seconds);
         focusTime.append(`${minutes}:${seconds}`.toString());
         focusTimeContainer.appendChild(focusTime);
+
+        const lengthFocusTime = localStorage.getItem('length');
+        localStorage.setItem('length', lengthFocusTime-1+2);
+        localStorage.setItem(lengthFocusTime, `${minutes}:${seconds}`);
         makeSumOfFocusTime();
     }
 }
