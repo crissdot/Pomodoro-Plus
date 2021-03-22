@@ -1,4 +1,5 @@
 .container__timer {
+    position: relative;
     display: flex;
     width: 80%;
     min-width: 300px;
@@ -45,6 +46,14 @@
 }
 .timer__counter--rest {
     color: var(--color-rest);
+}
+.timer__scroll-down {
+    position: absolute;
+    left: calc(50% - 5px);
+    bottom: 20px;
+    opacity: 0.5;
+    fill: var(--color-primary);
+    stroke: var(--color-secondary);
 }
 
 
