@@ -61,14 +61,14 @@ btnPause.addEventListener('click', () => {
     handleDisabledButtons(buttons, disabledPause);
 });
 
-btnFinish.addEventListener('click', (e) => {
+btnFinish.addEventListener('click', () => {
     if(isFocusing) {
-        const [minutes, seconds, isFocus] = timerUp.finish();
+        const [mins, secs, isFocus] = timerUp.finish();
         isFocusing = isFocus;
-        restTime = makeRestTime(minutes);
-        addFocusTime(minutes, seconds);
 
-        if(minutes >= 5) {
+        if(mins >= 5) {
+            restTime = makeRestTime(mins);
+            addFocusTime(mins, secs);
             headerTitle.innerHTML = 'RESTING';
             header.classList.add('header--rest');
             headerIcons[0].classList.add('header__svg--rest');
@@ -85,6 +85,8 @@ btnFinish.addEventListener('click', (e) => {
             timeoutFinishRestTime(restTimeRemaining);
             btnFinish.blur();
             return;
+        } else {
+            headerTitle.innerHTML = 'POMODORO PLUS';
         }
     } else {
         finishRestTime();
