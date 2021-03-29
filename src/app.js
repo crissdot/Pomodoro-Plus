@@ -5,6 +5,12 @@ import { addFocusTime } from './components/FocusTime';
 import { getTimeFromSeconds } from './utils/getTimeFromSeconds.js';
 import { disabledStart, disabledPause, disabledFinish, handleDisabledButtons } from './utils/handleDisabledButtons.js';
 
+const favicon = document.getElementById('favicon');
+import pomodoroFavicon from './images/pomodoro.png';
+import redFavicon from './images/red.png';
+import orangeFavicon from './images/orange.png';
+import greenFavicon from './images/green.png';
+
 const btnStart = document.getElementById('start');
 const btnPause = document.getElementById('pause');
 const btnFinish = document.getElementById('finish');
@@ -33,6 +39,7 @@ btnStart.addEventListener('click', () => {
         if(isFocusing) {
             isFocusing = timerUp.start();
             headerTitle.innerHTML = 'FOCUSING';
+            favicon.setAttribute('href', redFavicon);
         }
         else {
             isFocusing = timerDown.start();
@@ -47,7 +54,10 @@ btnStart.addEventListener('click', () => {
 
 btnPause.addEventListener('click', () => {
     if(isRunning) {
-        if(isFocusing) timerUp.pause();
+        if(isFocusing) {
+            timerUp.pause();
+            favicon.setAttribute('href', orangeFavicon);
+        }
         else {
             timerDown.pause();
             clearTimeout(restTimeout);
@@ -84,9 +94,12 @@ btnFinish.addEventListener('click', () => {
             restTimeRemaining = (minutes * 60 + seconds) * 1000;
             timeoutFinishRestTime(restTimeRemaining);
             btnFinish.blur();
+
+            favicon.setAttribute('href', greenFavicon);
             return;
         } else {
             headerTitle.innerHTML = 'POMODORO PLUS';
+            favicon.setAttribute('href', pomodoroFavicon);
         }
     } else {
         finishRestTime();
@@ -125,4 +138,6 @@ function finishRestTime() {
     }
     const [ , , isFocus] = timerDown.finish();
     isFocusing = isFocus;
+
+    favicon.setAttribute('href', pomodoroFavicon);
 }

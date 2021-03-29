@@ -1,6 +1,9 @@
 import Timer from './CountTimer.js';
 const timerLegend = document.querySelector('.timer__legend');
 
+const favicon = document.getElementById('favicon');
+import greenFavicon from '../../images/green.png';
+
 class TimerUp extends Timer {
     constructor(timer) {
         super(timer);
@@ -26,6 +29,8 @@ class TimerUp extends Timer {
         if(this.minutes === 25 && this.seconds === 0) {
             Timer.timerCounter.classList.add('timer__counter--rest');
             timerLegend.style.opacity = 1;
+
+            favicon.setAttribute('href', greenFavicon);
         }
     }
 
