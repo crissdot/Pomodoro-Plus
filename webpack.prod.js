@@ -17,14 +17,6 @@ module.exports = merge(common, {
                     'css-loader',
                 ]
             },
-            {
-                test: /\.png$/i,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].png',
-                    outputPath: 'images'
-                }
-            }
         ]
     },
     optimization: {

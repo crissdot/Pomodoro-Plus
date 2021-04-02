@@ -14,6 +14,14 @@ module.exports = {
                 test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.png$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].png',
+                    outputPath: 'images'
+                }
             }
         ]
     },
