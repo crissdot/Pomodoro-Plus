@@ -81,8 +81,7 @@ btnFinish.addEventListener('click', () => {
             addFocusTime(mins, secs);
             headerTitle.innerHTML = 'RESTING';
             header.classList.add('header--rest');
-            headerIcons[0].classList.add('header__svg--rest');
-            headerIcons[1].classList.add('header__svg--rest');
+            headerIcons.classList.add('header__svg--rest');
             if(window.matchMedia('(min-width: 600px)').matches) {
                 btnStart.parentElement.parentElement.classList.add('scrollbar--rest');
             }
@@ -131,8 +130,7 @@ function timeoutFinishRestTime(milliseconds) {
 function finishRestTime() {
     headerTitle.innerHTML = 'POMODORO PLUS';
     header.classList.remove('header--rest');
-    headerIcons[0].classList.remove('header__svg--rest');
-    headerIcons[1].classList.remove('header__svg--rest');
+    headerIcons.classList.remove('header__svg--rest');
     if(window.matchMedia('(min-width: 600px)').matches) {
         btnStart.parentElement.parentElement.classList.remove('scrollbar--rest');
     }

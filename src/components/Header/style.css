@@ -12,8 +12,17 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+.toggle {
+    width: 25px;
+}
+.header__title {
+    font-size: 1.2rem;
+}
 .header__icon {
     fill: var(--color-white);
+}
+.icon--pomodoro {
+    display: none;
 }
 .pomodoro--dark {
     fill: black;
@@ -22,22 +31,27 @@ header {
     display: none;
 }
 .toggle--dark + label {
-    cursor: pointer;
     display: inline-block;
-    width: 3rem;
-    height: 1.5rem;
+    position: relative;
+    width: 35px;
+    height: 16px;
     border-radius: 10px;
     background-color: var(--color-secondary);
-    position: relative;
+    cursor: pointer;
 }
 .toggle--dark + label::after {
-    position: absolute;
     content: "";
-    width: 1.8rem;
-    height: 1.8rem;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -2px;
+    left: 20px;
     border-radius: 50%;
     background-color: var(--color-variation);
-    top: -0.1rem;
+    transition: all 0.3s ease-in;
+}
+.toggle--dark:checked + label::after {
+    left: 0;
 }
 .header__icon--github {
     margin-top: 4px;
@@ -49,4 +63,31 @@ header {
 .header--rest {
     background-color: var(--color-rest);
     color: var(--color-primary);
+}
+
+
+@media only screen and (min-width: 600px) {
+    body.force-dark > .header--rest .pomodoro--light {
+        fill: white;
+    }
+    .toggle {
+        width: 125px;
+    }
+    .header__title {
+        font-size: 1.8rem;
+        margin-left: -100px;
+    }
+    .icon--pomodoro {
+        display: inline-block;
+    }
+    .toggle--dark + label {
+        width: 50px;
+        height: 20px;
+        margin-bottom: 1px;
+    }
+    .toggle--dark + label::after {
+        width: 25px;
+        height: 25px;
+        left: 25px;
+    }
 }
