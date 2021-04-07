@@ -21,19 +21,23 @@ if(initialLengthFocusTime > 0) {
 }
 
 btnCleanTime.addEventListener('click', () => {
-    const allTimeNodeList = focusTimeContainer.querySelectorAll('p');
-    const allTimeElement = [...allTimeNodeList];
-    allTimeElement.forEach(timeElement => {
-        focusTimeContainer.removeChild(timeElement);
-    });
-
-    focusTotal.innerHTML = 'Total: 00:00';
+    const isCleanTime = window.confirm('Are you sure?');
     btnCleanTime.blur();
 
-    localStorage.clear();
-    localStorage.setItem('length', 0);
+    if(isCleanTime) {
+        const allTimeNodeList = focusTimeContainer.querySelectorAll('p');
+        const allTimeElement = [...allTimeNodeList];
+        allTimeElement.forEach(timeElement => {
+            focusTimeContainer.removeChild(timeElement);
+        });
 
-    disableBtnCleanTime();
+        focusTotal.innerHTML = 'Total: 00:00';
+
+        localStorage.clear();
+        localStorage.setItem('length', 0);
+
+        disableBtnCleanTime();
+    }
 });
 
 function disableBtnCleanTime() {
