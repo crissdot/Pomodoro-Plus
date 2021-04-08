@@ -33,7 +33,9 @@ btnCleanTime.addEventListener('click', () => {
 
         focusTotal.innerHTML = 'Total: 00:00';
 
+        const colorScheme = window.localStorage.getItem('color--scheme');
         localStorage.clear();
+        if(colorScheme) window.localStorage.setItem('color--scheme', colorScheme);
         localStorage.setItem('length', 0);
 
         disableBtnCleanTime();

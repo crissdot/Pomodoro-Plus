@@ -7,18 +7,39 @@ const headerIcons = document.querySelector('.header__icon--github svg');
 const bodyElement = document.querySelector('body');
 
 window.addEventListener('load', () => {
+    setInitialValueLS();
+
     const checkElement = document.querySelector('#toggle--dark');
     checkElement.checked = isUsingDarkMode();
 
     checkElement.addEventListener('change', () => {
         if(checkElement.checked) {
             bodyElement.classList.remove('force-light');
+            setDarkModeValueFromLS('dark');
             return bodyElement.classList.add('force-dark');
         }
         bodyElement.classList.remove('force-dark');
+        setDarkModeValueFromLS('light');
         return bodyElement.classList.add('force-light');
     })
 })
+
+function setInitialValueLS() {
+    const savedValue = getDarkModeValueFromLS();
+    if(!savedValue) return;
+
+    if(savedValue === 'light') bodyElement.className = 'force-light';
+}
+
+function getDarkModeValueFromLS() {
+    if(!window.localStorage) return;
+    return window.localStorage.getItem('color--scheme');
+}
+
+function setDarkModeValueFromLS(value) {
+    if(!window.localStorage) return;
+    return window.localStorage.setItem('color--scheme', value);
+}
 
 function isUsingDarkMode() {
     const blackColor = getComputedStyle(bodyElement).getPropertyValue('--dark').trim();
