@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Plus</title>
-    <link id="favicon" rel="icon" type="image/png" sizes="16x16" href="./images/pomodoro.png">
+    <link id="favicon" rel="icon" type="image/png" sizes="16x16" href="./assets/pomodoro.png">
 </head>
 <body class="force-dark">
     <header>
@@ -24,6 +24,10 @@
     </header>
     <main>
         <section class="container__timer">
+            <div class="tomer__toggle">
+                <input type="checkbox" id="toggle--sound">
+                <label for="toggle--sound"></label>
+            </div>
             <div class="timer__counter">00:00</div>
             <p class="timer__legend">Time to rest!</p>
             <button id="start" class="timer__btn">Start</button>

@@ -4,6 +4,10 @@ const timerLegend = document.querySelector('.timer__legend');
 const favicon = document.getElementById('favicon');
 import greenFavicon from '../../images/green.png';
 
+const checkElement = document.querySelector('#toggle--sound');
+import finishTimeSoundFile from '../../sounds/gta.mp3';
+const finishTimeSound = new Audio(finishTimeSoundFile);
+
 class TimerUp extends Timer {
     constructor(timer) {
         super(timer);
@@ -31,6 +35,8 @@ class TimerUp extends Timer {
             timerLegend.style.opacity = 1;
 
             favicon.setAttribute('href', greenFavicon);
+
+            if(checkElement.checked) finishTimeSound.play();
         }
     }
 

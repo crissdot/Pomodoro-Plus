@@ -16,11 +16,11 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.png$/i,
+                test: /\.(png|mp3)$/i,
                 loader: 'file-loader',
                 options: {
-                    name: '[name].png',
-                    outputPath: 'images'
+                    name: '[name].[ext]',
+                    outputPath: 'assets'
                 }
             }
         ]
