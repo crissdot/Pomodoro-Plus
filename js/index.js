@@ -172,12 +172,17 @@ Timer.isFocusing = true;
 Timer.timerCounter = displayTimer;
 /* harmony default export */ var CountTimer = (Timer);
 ;// CONCATENATED MODULE: ./src/images/green.png
-/* harmony default export */ var green = (__webpack_require__.p + "images/green.png");
+/* harmony default export */ var green = (__webpack_require__.p + "assets/green.png");
+;// CONCATENATED MODULE: ./src/sounds/gta.mp3
+/* harmony default export */ var gta = (__webpack_require__.p + "assets/gta.mp3");
 ;// CONCATENATED MODULE: ./src/components/Timer/CountUpTimer.js
 
 const timerLegend = document.querySelector('.timer__legend');
 const favicon = document.getElementById('favicon');
 
+const checkElement = document.querySelector('#toggle--sound');
+
+const finishTimeSound = new Audio(gta);
 
 class TimerUp extends CountTimer {
   constructor(timer) {
@@ -206,6 +211,7 @@ class TimerUp extends CountTimer {
       CountTimer.timerCounter.classList.add('timer__counter--rest');
       timerLegend.style.opacity = 1;
       favicon.setAttribute('href', green);
+      if (checkElement.checked) finishTimeSound.play();
     }
   }
 
@@ -414,11 +420,11 @@ function handleDisabledButtons({
 
 
 ;// CONCATENATED MODULE: ./src/images/pomodoro.png
-/* harmony default export */ var pomodoro = (__webpack_require__.p + "images/pomodoro.png");
+/* harmony default export */ var pomodoro = (__webpack_require__.p + "assets/pomodoro.png");
 ;// CONCATENATED MODULE: ./src/images/red.png
-/* harmony default export */ var red = (__webpack_require__.p + "images/red.png");
+/* harmony default export */ var red = (__webpack_require__.p + "assets/red.png");
 ;// CONCATENATED MODULE: ./src/images/orange.png
-/* harmony default export */ var orange = (__webpack_require__.p + "images/orange.png");
+/* harmony default export */ var orange = (__webpack_require__.p + "assets/orange.png");
 ;// CONCATENATED MODULE: ./src/app.js
 
 
