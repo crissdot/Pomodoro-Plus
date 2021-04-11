@@ -10,6 +10,35 @@
     text-align: center;
     scroll-snap-align: start;
 }
+.timer__toggle {
+    position: absolute;
+    left: calc(10vw * -1 + 25px);
+    top: 10px;
+}
+.toggle--sound {
+    display: none;
+}
+.toggle--sound + label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: transparent;
+    z-index: 1;
+    cursor: pointer;
+}
+.timer__volume-on, .timer__volume-off {
+    position: absolute;
+    left: 0;
+    fill: var(--color-secondary);
+    z-index: -1;
+}
+.timer__volume-on {
+    opacity: 0;
+}
+.timer__volume-off > path:nth-of-type(2) {
+    stroke: var(--color-productivity);
+}
 .timer__counter {
     margin: 0 auto;
     color: var(--color-productivity);
@@ -78,6 +107,9 @@ body.force-light .timer__scroll-down {
 @media only screen and (min-width: 600px) {
     .container__timer {
         padding-left: 20px;
+    }
+    .timer__toggle {
+        left: calc(10vw * -1 + 70px);
     }
     .timer__counter {
         font-size: 9rem;
