@@ -109,7 +109,11 @@ body.force-light .timer__scroll-down {
         padding-left: 20px;
     }
     .timer__toggle {
-        left: calc(10vw * -1 + 70px);
+        left: calc(10vw * -1 + 65px);
+    }
+    .toggle--sound + label, .timer__volume-on, .timer__volume-off {
+        width: 35px;
+        height: 35px;
     }
     .timer__counter {
         font-size: 9rem;
