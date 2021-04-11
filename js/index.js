@@ -253,6 +253,18 @@ class TimerDown extends CountTimer {
 
 
 
+const soundCheckElement = document.querySelector('#toggle--sound');
+const volumeOn = document.querySelector('.timer__volume-on');
+const volumeOff = document.querySelector('.timer__volume-off');
+soundCheckElement.addEventListener('change', () => {
+  if (soundCheckElement.checked) {
+    volumeOff.style.opacity = 0;
+    volumeOn.style.opacity = 1;
+  } else {
+    volumeOn.style.opacity = 0;
+    volumeOff.style.opacity = 1;
+  }
+});
 
 function makeTimerUp() {
   const countUpTimer = {
