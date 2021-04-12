@@ -16,5 +16,6 @@ deploy:
   local_dir: dist/
   target_branch: gh-pages
   commit_message: "Deploy Release"
+  if: tag IS present
   on:
     tags: true
