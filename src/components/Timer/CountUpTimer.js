@@ -5,7 +5,7 @@ const favicon = document.getElementById('favicon');
 import greenFavicon from '../../images/green.png';
 
 const checkElement = document.querySelector('#toggle--sound');
-import finishTimeSoundFile from '../../sounds/gta.mp3';
+import finishTimeSoundFile from '../../sounds/finishFocusTime.mp3';
 const finishTimeSound = new Audio(finishTimeSoundFile);
 
 class TimerUp extends Timer {
