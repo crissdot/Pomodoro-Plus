@@ -1,5 +1,6 @@
 import './style.css';
 
+import { cleanLocalStorage } from '../../utils/cleanLocalStorage.js';
 import { makeFormat } from '../../utils/makeTimerFormat.js';
 import { getTimeFromSeconds } from '../../utils/getTimeFromSeconds.js';
 
@@ -33,10 +34,7 @@ btnCleanTime.addEventListener('click', () => {
 
         focusTotal.innerHTML = 'Total: 00:00';
 
-        const colorScheme = window.localStorage.getItem('color--scheme');
-        localStorage.clear();
-        if(colorScheme) window.localStorage.setItem('color--scheme', colorScheme);
-        localStorage.setItem('length', 0);
+        cleanLocalStorage();
 
         disableBtnCleanTime();
     }

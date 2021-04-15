@@ -7,15 +7,46 @@ const soundCheckElement = document.querySelector('#toggle--sound');
 const volumeOn = document.querySelector('.timer__volume-on');
 const volumeOff = document.querySelector('.timer__volume-off');
 
-soundCheckElement.addEventListener('change', () => {
-    if(soundCheckElement.checked) {
+window.addEventListener('load', () => {
+    setInitialValueLS();
+    soundCheckElement.checked = isAudioOff();
+
+    soundCheckElement.addEventListener('change', () => {
+        if(soundCheckElement.checked) {
+            volumeOff.style.opacity = 0;
+            setAudioToLS('on');
+            volumeOn.style.opacity = 1;
+        } else {
+            volumeOn.style.opacity = 0;
+            setAudioToLS('off');
+            volumeOff.style.opacity = 1;
+        }
+    })
+})
+
+function setInitialValueLS() {
+    const savedValue = getAudioFromLS();
+    if(!savedValue) return;
+
+    if(savedValue === 'on') {
         volumeOff.style.opacity = 0;
         volumeOn.style.opacity = 1;
-    } else {
-        volumeOn.style.opacity = 0;
-        volumeOff.style.opacity = 1;
     }
-})
+}
+
+function isAudioOff() {
+    return getAudioFromLS() === 'off';
+}
+
+function getAudioFromLS() {
+    if(!window.localStorage) return;
+    return window.localStorage.getItem('audio');
+}
+
+function setAudioToLS(value) {
+    if(!window.localStorage) return;
+    return window.localStorage.setItem('audio', value);
+}
 
 function makeTimerUp() {
     const countUpTimer = {
