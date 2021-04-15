@@ -173,8 +173,8 @@ Timer.timerCounter = displayTimer;
 /* harmony default export */ var CountTimer = (Timer);
 ;// CONCATENATED MODULE: ./src/images/green.png
 /* harmony default export */ var green = (__webpack_require__.p + "assets/green.png");
-;// CONCATENATED MODULE: ./src/sounds/gta.mp3
-/* harmony default export */ var gta = (__webpack_require__.p + "assets/gta.mp3");
+;// CONCATENATED MODULE: ./src/sounds/finishFocusTime.mp3
+/* harmony default export */ var finishFocusTime = (__webpack_require__.p + "assets/finishFocusTime.mp3");
 ;// CONCATENATED MODULE: ./src/components/Timer/CountUpTimer.js
 
 const timerLegend = document.querySelector('.timer__legend');
@@ -182,7 +182,7 @@ const favicon = document.getElementById('favicon');
 
 const checkElement = document.querySelector('#toggle--sound');
 
-const finishTimeSound = new Audio(gta);
+const finishTimeSound = new Audio(finishFocusTime);
 
 class TimerUp extends CountTimer {
   constructor(timer) {
@@ -218,8 +218,13 @@ class TimerUp extends CountTimer {
 }
 
 /* harmony default export */ var CountUpTimer = (TimerUp);
+;// CONCATENATED MODULE: ./src/sounds/finishRestTime.mp3
+/* harmony default export */ var finishRestTime = (__webpack_require__.p + "assets/finishRestTime.mp3");
 ;// CONCATENATED MODULE: ./src/components/Timer/CountDownTimer.js
 
+const CountDownTimer_checkElement = document.querySelector('#toggle--sound');
+
+const CountDownTimer_finishTimeSound = new Audio(finishRestTime);
 
 class TimerDown extends CountTimer {
   constructor(timer) {
@@ -242,7 +247,10 @@ class TimerDown extends CountTimer {
       this.seconds = 59;
     } else this.seconds--;
 
-    if (this.minutes === 0 && this.seconds === 0) clearInterval(this.interval);
+    if (this.minutes === 0 && this.seconds === 0) {
+      clearInterval(this.interval);
+      if (CountDownTimer_checkElement.checked) CountDownTimer_finishTimeSound.play();
+    }
   }
 
 }
@@ -256,15 +264,45 @@ class TimerDown extends CountTimer {
 const soundCheckElement = document.querySelector('#toggle--sound');
 const volumeOn = document.querySelector('.timer__volume-on');
 const volumeOff = document.querySelector('.timer__volume-off');
-soundCheckElement.addEventListener('change', () => {
-  if (soundCheckElement.checked) {
+window.addEventListener('load', () => {
+  Timer_setInitialValueLS();
+  soundCheckElement.checked = isAudioOff();
+  soundCheckElement.addEventListener('change', () => {
+    if (soundCheckElement.checked) {
+      volumeOff.style.opacity = 0;
+      setAudioToLS('on');
+      volumeOn.style.opacity = 1;
+    } else {
+      volumeOn.style.opacity = 0;
+      setAudioToLS('off');
+      volumeOff.style.opacity = 1;
+    }
+  });
+});
+
+function Timer_setInitialValueLS() {
+  const savedValue = getAudioFromLS();
+  if (!savedValue) return;
+
+  if (savedValue === 'on') {
     volumeOff.style.opacity = 0;
     volumeOn.style.opacity = 1;
-  } else {
-    volumeOn.style.opacity = 0;
-    volumeOff.style.opacity = 1;
   }
-});
+}
+
+function isAudioOff() {
+  return getAudioFromLS() === 'off';
+}
+
+function getAudioFromLS() {
+  if (!window.localStorage) return;
+  return window.localStorage.getItem('audio');
+}
+
+function setAudioToLS(value) {
+  if (!window.localStorage) return;
+  return window.localStorage.setItem('audio', value);
+}
 
 function makeTimerUp() {
   const countUpTimer = {
@@ -293,6 +331,17 @@ function renderTimer(minutes, seconds) {
 }
 
 
+;// CONCATENATED MODULE: ./src/utils/cleanLocalStorage.js
+function cleanLocalStorage() {
+  const colorScheme = window.localStorage.getItem('color--scheme');
+  const audio = window.localStorage.getItem('audio');
+  localStorage.clear();
+  localStorage.setItem('length', 0);
+  if (colorScheme) window.localStorage.setItem('color--scheme', colorScheme);
+  if (audio) window.localStorage.setItem('audio', audio);
+}
+
+
 ;// CONCATENATED MODULE: ./src/utils/getTimeFromSeconds.js
 function getTimeFromSeconds(totalTimeInSeconds) {
   let i;
@@ -307,6 +356,7 @@ function getTimeFromSeconds(totalTimeInSeconds) {
 
 
 ;// CONCATENATED MODULE: ./src/components/FocusTime/index.js
+
 
 
 
@@ -339,10 +389,7 @@ btnCleanTime.addEventListener('click', () => {
       focusTimeContainer.removeChild(timeElement);
     });
     focusTotal.innerHTML = 'Total: 00:00';
-    const colorScheme = window.localStorage.getItem('color--scheme');
-    localStorage.clear();
-    if (colorScheme) window.localStorage.setItem('color--scheme', colorScheme);
-    localStorage.setItem('length', 0);
+    cleanLocalStorage();
     disableBtnCleanTime();
   }
 });
@@ -534,7 +581,7 @@ btnFinish.addEventListener('click', () => {
       app_favicon.setAttribute('href', pomodoro);
     }
   } else {
-    finishRestTime();
+    app_finishRestTime();
     clearTimeout(restTimeout);
   }
 
@@ -557,14 +604,14 @@ function makeRestTime(totalMinutes) {
 
 function timeoutFinishRestTime(milliseconds) {
   restTimeout = setTimeout(() => {
-    finishRestTime();
+    app_finishRestTime();
     isRunning = false;
     handleDisabledButtons(buttons, disabledFinish);
   }, milliseconds);
   restTimeStart = Date.now();
 }
 
-function finishRestTime() {
+function app_finishRestTime() {
   headerTitle.innerHTML = 'POMODORO PLUS';
   header.classList.remove('header--rest');
   headerIcons.classList.remove('header__svg--rest');
