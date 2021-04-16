@@ -9,7 +9,7 @@ const volumeOff = document.querySelector('.timer__volume-off');
 
 window.addEventListener('load', () => {
     setInitialValueLS();
-    soundCheckElement.checked = isAudioOff();
+    soundCheckElement.checked = isAudioOn();
 
     soundCheckElement.addEventListener('change', () => {
         if(soundCheckElement.checked) {
@@ -34,8 +34,8 @@ function setInitialValueLS() {
     }
 }
 
-function isAudioOff() {
-    return getAudioFromLS() === 'off';
+function isAudioOn() {
+    return getAudioFromLS() === 'on';
 }
 
 function getAudioFromLS() {
