@@ -266,7 +266,7 @@ const volumeOn = document.querySelector('.timer__volume-on');
 const volumeOff = document.querySelector('.timer__volume-off');
 window.addEventListener('load', () => {
   Timer_setInitialValueLS();
-  soundCheckElement.checked = isAudioOff();
+  soundCheckElement.checked = isAudioOn();
   soundCheckElement.addEventListener('change', () => {
     if (soundCheckElement.checked) {
       volumeOff.style.opacity = 0;
@@ -290,8 +290,8 @@ function Timer_setInitialValueLS() {
   }
 }
 
-function isAudioOff() {
-  return getAudioFromLS() === 'off';
+function isAudioOn() {
+  return getAudioFromLS() === 'on';
 }
 
 function getAudioFromLS() {
